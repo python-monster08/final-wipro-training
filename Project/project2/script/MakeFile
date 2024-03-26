@@ -1,0 +1,36 @@
+CC = gcc
+
+ProjDir = /home/rps/batch01/Project/project2
+
+
+INC = $(ProjDir)/inc
+SRC = $(ProjDir)/src
+OBJ = $(ProjDir)/obj
+BIN = $(ProjDir)/bin
+
+
+CFLAGS = -c -g -Wall
+
+LDFLAGS = -o
+
+IFLAGS = -I $(INC)
+
+
+all: empPrg
+
+simpleCalc: $(OBJ)/main.o $(OBJ)/emp.o
+	$(CC) $(LDFLAGS) $(BIN)/empPrg $(OBJ)/main.o $(OBJ)/emp.o
+
+$(OBJ)/main.o: $(SRC)/main.c
+	$(CC) $(CFLAGS) $(SRC)/main.c $(IFLAGS)
+	mv main.o $(OBJ)/
+	
+$(OBJ)/emp.o: $(SRC)/emp.c
+	$(CC) $(CFLAGS) $(SRC)/emp.c $(IFLAGS)
+	mv emp.o $(OBJ)/
+
+clean:
+	rm -f *.out *.o
+	rm -f $(OBJ)/*.o
+	rm -f $(BIN)/*
+	@echo "Cleaning Done!"
